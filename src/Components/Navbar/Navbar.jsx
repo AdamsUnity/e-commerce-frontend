@@ -70,9 +70,21 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="nav-login-cart">
-        <Link to="Login">
-          <button>Login</button>
-        </Link>
+        {localStorage.getItem("auth-token") ? (
+          <button
+            onClick={() => {
+              localStorage.removeItem("auth-token");
+              window.location.replace("/");
+            }}
+          >
+            Logout
+          </button>
+        ) : (
+          <Link to="Login">
+            <button>Login</button>
+          </Link>
+        )}
+
         <Link to="Cart">
           <img src={cart_icon} alt="" />
         </Link>
